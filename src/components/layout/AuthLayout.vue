@@ -3,19 +3,23 @@
     <div class="nav hidden-lg-up"><router-link class="i-vuestic" :to="{path: '/'}"></router-link></div>
     <div class="main row">
       <div class="auth-content col-lg-6 col-12">
-        <router-view></router-view>
+        <login></login>
       </div>
       <div class="auth-wallpaper col-6 hidden-md-down">
         <div class="oblique"></div>
-        <router-link class="i-vuestic" :to="{path: '/'}"></router-link>
+        <h1 class="" style = "color:green; z-index:1;">Youth</h1>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import Login from '../auth/login/Login'
   export default {
-    name: 'AuthLayout'
+    name: 'AuthLayout',
+    components:{
+      Login
+    }
   }
 </script>
 

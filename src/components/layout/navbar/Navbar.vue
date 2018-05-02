@@ -2,7 +2,8 @@
   <nav class="navbar app-navbar navbar-toggleable-md">
     <div class="navbar-brand-container d-flex align-items-center justify-content-start">
       <a class="navbar-brand" href="#">
-        <i class="i-vuestic"></i>
+        <!-- <i class="i-vuestic"></i> -->
+        <strong>Youth Attendance</strong>
       </a>
     </div>
 
@@ -19,7 +20,8 @@
       </div>
 
       <div class="offset-lg-8"></div>
-      <div class="col nav-item dropdown navbar-dropdown d-flex align-items-center justify-content-center" v-dropdown>
+       <div class = "col nav-item d-flex align-items-center justify-content-center"><a class = "nav-link" v-on:click="logout()">Log out</a></div>
+       <!--<div class="col nav-item dropdown navbar-dropdown d-flex align-items-center justify-content-center" v-dropdown>
         <a class="nav-link dropdown-toggle d-flex align-items-center justify-content" href="#" @click.prevent="closeMenu">
           <span class="i-nav-messages notify"></span>
         </a>
@@ -35,9 +37,9 @@
               <a class="plain-link" href="#">See all messages</a>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col nav-item dropdown navbar-dropdown d-flex align-items-center justify-content-center" v-dropdown>
+        </div> 
+      </div>-->
+      <!-- <div class="col nav-item dropdown navbar-dropdown d-flex align-items-center justify-content-center" v-dropdown>
         <a class="nav-link dropdown-toggle d-flex align-items-center justify-content" href="#" @click.prevent="closeMenu">
           <span class="i-nav-notification notify"></span>
         </a>
@@ -57,8 +59,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col nav-item dropdown navbar-dropdown d-flex align-items-center justify-content-center" v-dropdown>
+      </div> -->
+      <!-- <div class="col nav-item dropdown navbar-dropdown d-flex align-items-center justify-content-center" v-dropdown>
         <a class="nav-link dropdown-toggle d-flex align-items-center justify-content" href="#" @click.prevent="closeMenu">
           <span class="avatar-container">
             <img src="http://i.imgur.com/nfa5itq.png" />
@@ -74,7 +76,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </nav>
 </template>
@@ -82,6 +84,9 @@
 <script>
   import { mapGetters, mapActions } from 'vuex'
   import Dropdown from 'directives/Dropdown'
+  import store from 'vuex-store'
+  let server = store.getters.server
+  import axios from 'axios'
 
   export default {
     name: 'navbar',
@@ -99,12 +104,20 @@
         'closeMenu',
         'toggleSidebar',
         'isToggleWithoutAnimation'
-      ])
+      ]),
+      logout:function(){
+        axios.get(server + '/login').then(function(res){
+          store.commit('setLoggedIn', false)
+
+        })
+      }
     }
   }
 </script>
 
 <style lang="scss">
+
+   
   @import "../../../sass/_variables.scss";
   @import "../../../../node_modules/bootstrap/scss/mixins/breakpoints";
   @import "../../../../node_modules/bootstrap/scss/variables";

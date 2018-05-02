@@ -18,6 +18,9 @@
   import Sidebar from './sidebar/Sidebar'
   import Resize from 'directives/ResizeHandler'
   import VuesticPreLoader from '../vuestic-components/vuestic-preloader/VuesticPreLoader.vue'
+  import axios from 'axios'
+  import store from 'vuex-store'
+  let server = store.getters.server
 
   export default {
     name: 'layout',
@@ -26,6 +29,20 @@
       VuesticPreLoader,
       Navbar,
       Sidebar
+    },
+    methods:{
+      isLoggedIn: function(){
+            axios.defaults.withCredentials = true
+            axios.get(server + '/isLoggedIn').then(function(res){
+              console.log(res)
+              store.commit('setLoggedIn', res.data)
+            })
+
+      }
+
+    },
+    beforeMount(){
+      isLoggedIn
     },
     directives: {
       resize: Resize

@@ -19,15 +19,6 @@ export default {
         default: false,
         title: 'Login'
       }
-    },
-    {
-      name: 'Signup',
-      path: '/auth/signup',
-      component: lazyLoading('auth/signup/Signup'),
-      meta: {
-        default: false,
-        title: 'Signup'
-      }
     }
   ]
 }

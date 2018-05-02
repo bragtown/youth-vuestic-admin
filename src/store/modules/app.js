@@ -10,6 +10,9 @@ const state = {
       apiKey: 'AIzaSyBNAqPrTQoz9P4NBlDDyfxrnKiafkaL8iQ'
     },
     windowMatchSizeLg: '(min-width: 992px)',
+    server: window.location.hostname === 'localhost' || window.location.hostname === 'ldsapp.lvh.me' ? 'http://localhost:9000' :
+            window.location.hostname === 'ldsapp.bragtown.com' ? 'https://www.bragtown.com' : '',
+    loggedIn:false,
     palette: {
       primary: '#4ae387',
       danger: '#e34a4a',
@@ -23,7 +26,8 @@ const state = {
       lighterGray: '#ddd'
     }
   },
-  isLoading: true
+  isLoading: true,
+  loggedIn: false
 }
 
 const mutations = {
@@ -40,6 +44,10 @@ const mutations = {
   },
   setLoading (state, isLoading) {
     state.isLoading = isLoading
+  },
+  setLoggedIn (state, loggedIn){
+    console.log(state, loggedIn)
+    state.loggedIn = loggedIn
   }
 }
 

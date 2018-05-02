@@ -1,14 +1,17 @@
 <template>
   <div id="app" class="app">
-    <auth-layout v-if="isAuth"></auth-layout>
+    <auth-layout v-if="!loggedIn"></auth-layout>
     <layout v-else></layout>
   </div>
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
   import Layout from 'components/layout/Layout'
-  import AuthLayout from './components/layout/AuthLayout'
   import VuesticPreLoader from './components/vuestic-components/vuestic-preloader/VuesticPreLoader.vue'
+  import AuthLayout from './components/layout/AuthLayout'
+  import store from 'vuex-store'
+  let loggedIn = store.getters.loggedIn
 
   export default {
     name: 'app',
@@ -17,10 +20,10 @@
       AuthLayout,
       Layout
     },
-    computed: {
-      isAuth () {
-        return this.$route.path.match('auth')
-      }
+    computed: { 
+      ...mapGetters([
+        'loggedIn'
+      ])
     }
   }
 </script>
